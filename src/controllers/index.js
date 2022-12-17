@@ -182,7 +182,7 @@ async function postMessage(req, res) {
   try {
     const { message } = req.body
     if (!message) {
-      return res.status(400).json({ message: "Please enter your message." })
+      throw new Error('Please enter your message.')
     }
     const data = await handleChatGPTOpenAI(message)
     res.render('index', {
@@ -190,7 +190,9 @@ async function postMessage(req, res) {
     })
   } catch (error) {
     console.log(error);
-    res.status(500).json(error)
+    res.render('index', {
+      message: "Please enter your message."
+    })
   }
 }
 
