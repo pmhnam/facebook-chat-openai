@@ -178,7 +178,24 @@ async function handleChatGPTOpenAI(message) {
   }
 }
 
+async function postMessage(req, res) {
+  try {
+    const { message } = req.query
+    if (!message) {
+      return res.status(400).json({ message: "Please enter your message." })
+    }
+    const data = await handleChatGPTOpenAI(message)
+    res.render('index', {
+      message: data
+    })
+  } catch (error) {
+    console.log(error);
+    res.status(500).json(error)
+  }
+}
+
 module.exports = {
   getWebhook,
   postWebhook,
+  postMessage
 }

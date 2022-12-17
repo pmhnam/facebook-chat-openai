@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chat with AI</title>
+</head>
+
+<body>
+  <div class="text-body">
+    <p style="width: 500px; margin-left: 20px;">
+      <%= message %>
+    </p>
+  </div>
+  <form action="/webhook/chat" method="get">
+    <input style="margin-left: 20px; width: 320px; height: 30px;" type="text" name="message">
+    <input style="height: 36px;" type="submit" value="Sent">
+  </form>
+</body>
+
+</html>
