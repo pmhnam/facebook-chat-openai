@@ -20,15 +20,15 @@ const getWebhook = (req, res) => {
 
       // Responds with the challenge token from the request
       console.log('WEBHOOK_VERIFIED');
-      res.status(200).send(challenge);
+      return res.status(200).send(challenge);
 
     } else {
       // Responds with '403 Forbidden' if verify tokens do not match
-      res.sendStatus(403);
+      return res.sendStatus(403);
     }
   }
 
-  res.status(400).json({ message: "mode and token is required" })
+  return res.status(400).json({ message: "mode and token is required" })
 }
 
 // Creates the endpoint for your webhook
@@ -161,20 +161,25 @@ function callSendAPI(senderPsid, response) {
 }
 
 async function handleChatGPTOpenAI(message) {
-  const response = await openai.createCompletion({
-    model: "text-davinci-003",
-    prompt: `${message}`,
-    temperature: 0.5,
-    max_tokens: 60,
-    top_p: 0.3,
-    frequency_penalty: 0.5,
-    presence_penalty: 0.0,
-  });
-  console.log('> handleChatGPTOpenAI response:', response);
-  return response
+  try {
+    const { data } = await openai.createCompletion({
+      model: "text-davinci-003",
+      prompt: `${message}`,
+      temperature: 0.5,
+      max_tokens: 60,
+      top_p: 0.3,
+      frequency_penalty: 0.5,
+      presence_penalty: 0.0,
+    });
+    console.log('> handleChatGPTOpenAI response:', data.choices[0].text);
+    return data?.choices[0]?.text || "Error! An error occurred. Please contact me m.me/hnam.se"
+  } catch (error) {
+    console.log(error, '===error===');
+    return "Error! An error occurred. Please contact me m.me/hnam.se"
+  }
 }
 
 module.exports = {
   getWebhook,
-  postWebhook
+  postWebhook,
 }
