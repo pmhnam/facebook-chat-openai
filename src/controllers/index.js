@@ -43,11 +43,9 @@ const postWebhook = async (req, res) => {
 
       // Gets the body of the webhook event
       let webhookEvent = entry.messaging[0];
-      console.log('> webhookEvent:', webhookEvent);
 
       // Get the sender PSID
       let senderPsid = webhookEvent.sender.id;
-      console.log('> Sender PSID: ' + senderPsid);
 
       // Check if the event is a message or postback and
       // pass the event to the appropriate handler function
@@ -75,6 +73,7 @@ async function handleMessage(senderPsid, receivedMessage) {
   if (receivedMessage.text) {
     // Create the payload for a basic text message, which
     // will be added to the body of your request to the Send API
+    console.log('>> New message:', receivedMessage.text);
     const message = await handleChatGPTOpenAI(receivedMessage.text)
     response = {
       'text': `${message}`
@@ -171,7 +170,7 @@ async function handleChatGPTOpenAI(message) {
       frequency_penalty: parseFloat(process.env.FREQUENCY_PENALTY_RESPONSE_OPENAI) || 0.5,
       presence_penalty: parseFloat(process.env.PRESENCE_PENALTY_RESPONSE_OPENAI) || 0.0,
     });
-    console.log('> handleChatGPTOpenAI response:', data.choices[0].text);
+    console.log('>> ChatGPTOpenAI response:', data.choices[0].text);
     return data?.choices[0]?.text || "Error! An error occurred. Please contact me m.me/hnam.se"
   } catch (error) {
     console.log(error, '===error===');

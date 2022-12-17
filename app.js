@@ -6,7 +6,7 @@ const morgan = require('morgan')
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }));
-app.use(morgan('common'))
+app.use(morgan('tiny'))
 
 app.get('/', (req, res) => {
   res.send('hello from simple server :)')
