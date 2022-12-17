@@ -180,7 +180,7 @@ async function handleChatGPTOpenAI(message) {
 
 async function postMessage(req, res) {
   try {
-    const { message } = req.query
+    const { message } = req.body
     if (!message) {
       return res.status(400).json({ message: "Please enter your message." })
     }
