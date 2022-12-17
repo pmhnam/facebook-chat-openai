@@ -165,11 +165,11 @@ async function handleChatGPTOpenAI(message) {
     const { data } = await openai.createCompletion({
       model: "text-davinci-003",
       prompt: `${message}`,
-      temperature: 0.5,
-      max_tokens: 60,
-      top_p: 0.3,
-      frequency_penalty: 0.5,
-      presence_penalty: 0.0,
+      temperature: process.env.TEMPERATURE_RESPONSE_OPENAI || 0.5,
+      max_tokens: process.env.MAX_TOKENS_RESPONSE_OPENAI || 60,
+      top_p: process.env.TOP_P_RESPONSE_OPENAI || 0.3,
+      frequency_penalty: process.env.FREQUENCY_PENALTY_RESPONSE_OPENAI || 0.5,
+      presence_penalty: process.env.PRESENCE_PENALTY_RESPONSE_OPENAI || 0.0,
     });
     console.log('> handleChatGPTOpenAI response:', data.choices[0].text);
     return data?.choices[0]?.text || "Error! An error occurred. Please contact me m.me/hnam.se"
