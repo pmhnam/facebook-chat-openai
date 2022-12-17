@@ -39,7 +39,7 @@ const postWebhook = async (req, res) => {
   if (body.object === 'page') {
 
     // Iterates over each entry - there may be multiple if batched
-    body.entry.forEach(async function (entry) {
+    for (const entry of body.entry) {
 
       // Gets the body of the webhook event
       let webhookEvent = entry.messaging[0];
@@ -56,7 +56,7 @@ const postWebhook = async (req, res) => {
       } else if (webhookEvent.postback) {
         handlePostback(senderPsid, webhookEvent.postback);
       }
-    });
+    };
 
     // Returns a '200 OK' response to all requests
     res.status(200).send('EVENT_RECEIVED');

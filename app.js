@@ -8,7 +8,6 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }));
 app.use(morgan('common'))
 
-
 app.get('/', (req, res) => {
   res.send('hello from simple server :)')
 })
