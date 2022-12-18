@@ -17,5 +17,7 @@ app.get('/', (req, res) => {
 
 app.use('/webhook', webhookRouter)
 
-
+app.use((req, res, next) => {
+  res.redirect('/')
+})
 module.exports = app
