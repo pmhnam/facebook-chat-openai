@@ -1,5 +1,8 @@
 # FACEBOOK PAGE CHAT WITH OPEN AI
 
+## Demo
+- [Server](https://chat-cqp9.onrender.com)
+- [Facebook page](https://www.facebook.com/profile.php?id=100088819510224)
 ## Prepare
 
 - Create business an application in [Meta for developers](https://developers.facebook.com/apps/create) and setup messenger application
