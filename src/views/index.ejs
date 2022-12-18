@@ -11,7 +11,10 @@
 <body>
   <div class="text-body">
     <p style="width: 290px; margin-left: 7px;">
-      <%= message %>
+      <mark>You</mark>: <%= message %>
+    </p>
+    <p style="width: 290px; margin-left: 7px;">
+      <mark>AI</mark>: <%= data %>
     </p>
   </div>
   <form action="/webhook/chat" method="post">

@@ -186,12 +186,14 @@ async function postMessage(req, res) {
     }
     const data = await handleChatGPTOpenAI(message)
     res.render('index', {
-      message: data
+      message, 
+      data
     })
   } catch (error) {
     console.log(error);
     res.render('index', {
-      message: "Please enter your message."
+      data: "Please enter your message.",
+      message: null
     })
   }
 }
